@@ -11,7 +11,7 @@ import re
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
-from app import selectstock
+
 
 st.set_page_config(
     page_title='TESIA',

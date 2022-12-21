@@ -10,6 +10,8 @@ navigation = st.sidebar.selectbox('Pages : ', ('Twitter Sentiment', 'Price Predi
 selectstock = st.sidebar.image('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
 
 if navigation == 'Twitter Sentiment':
+    stock = selectstock
     sentiment.run()
 else:
+    stock = selectstock
     prediction.run()
