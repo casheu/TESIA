@@ -36,7 +36,7 @@ def run():
     # Creating list to append tweet data to
     attributes_container = []
 
-    stock = app.selectstock
+    stock = 'BBNI'
     
     today = datetime.datetime.now()
     today = today.strftime('%Y-%m-%d')
