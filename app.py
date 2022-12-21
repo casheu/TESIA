@@ -21,11 +21,11 @@ nlp = tf.keras.models.load_model('model_nlp')
 
 def run():
     with st.container():
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader('Twitter Sentiment')
-    with col2:
-        st.subheader("Price Prediction")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader('Twitter Sentiment')
+        with col2:
+            st.subheader("Price Prediction")
 
 if __name__ == '__main__':
     run()
