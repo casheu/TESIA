@@ -33,6 +33,8 @@ def run():
     
     # Title
     st.subheader('Twitter Sentiment')
+
+    stock = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     
     # Creating list to append tweet data to
     attributes_container = []
