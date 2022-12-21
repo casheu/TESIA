@@ -19,7 +19,7 @@ nltk.download('wordnet')
 nltk.download('omw-1.4')
 
 # Import model
-nlp = tf.keras.models.load_model('model_lstm.tf')
+nlp = tf.keras.models.load_model('model_lstm')
 
 def run():
     # Creating list to append tweet data to
