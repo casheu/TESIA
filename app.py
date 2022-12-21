@@ -57,7 +57,7 @@ def run():
     with st.container():
         col1, col2 = st.columns(2)
         with col1:
-            st.write("### Today's Tweet")
+            st.write("# Today's Tweet")
             st.markdown('---')
 
             attributes_container = []
@@ -79,8 +79,9 @@ def run():
 
             st.dataframe(tweets)
             
+
         with col2:
-            st.write("### Price History")
+            st.write("# Price History")
             st.markdown('---')
 
             # Scrapping
@@ -100,8 +101,21 @@ def run():
 
     with st.container():
         col1, col2 = st.columns(2)
+        
+        def stateful_button(*args, key=None, **kwargs):
+            if key is None:
+                raise ValueError("Must pass key")
+
+            if key not in st.session_state:
+                st.session_state[key] = False
+
+            if st.button(*args, **kwargs):
+                st.session_state[key] = not st.session_state[key]
+
+            return st.session_state[key]
+        
         with col1:
-            if st.button('Predict sentiment'):
+            if stateful_button('Predict sentiment', key="sentiment_button"):
                 st.markdown('---')
                 df = pd.DataFrame()
         
@@ -169,11 +183,11 @@ def run():
                     plt.show()
                     st.pyplot(fig)
 
-                st.write("### Sentiment Percentage")
+                st.write("# Sentiment Percentage")
                 PieComposition(pred_df, 'label')
 
         with col2:
-            if st.button('Predict Price'):
+            if stateful_button("Predict price", key="price_button"):
                 st.markdown('---')
                 
                 last_15 = hist_all[['Close']].tail(15).reset_index(inplace = False, drop = True)
@@ -192,7 +206,7 @@ def run():
                 Predict_true['Date'] = last_day.tail(1).reset_index(inplace=False,drop=True)
                 hist3m = hist_all.tail(75)
 
-                st.write("### Recent Prices and Prediction")
+                st.write("# Recent Prices and Prediction")
                 fig = go.Figure()
                 fig.add_trace(go.Candlestick(x=hist3m['Date'],
                       open=hist3m['Open'],
@@ -201,7 +215,7 @@ def run():
                       close=hist3m['Close']))
                 fig.add_trace(go.Scatter(x=Predict_true['Date'], y=Predict_true[0]))
                 st.plotly_chart(fig)
-                st.write('#### Prediction : ', Predict_true.at[0,0])
+                st.write('## Prediction : ', Predict_true.at[0,0])
 
         st.markdown('---')
 
