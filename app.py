@@ -1,5 +1,5 @@
 import streamlit as st
-import twitter
+import sentiment
 import prediction
 
 # Title
@@ -7,9 +7,9 @@ st.title('TESIA')
 
 navigation = st.sidebar.selectbox('Pages : ', ('Twitter Sentiment', 'Price Prediction'))
 
-#stockop = st.sidebar.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
+selectstock = st.sidebar.image('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
 
 if navigation == 'Twitter Sentiment':
-    twitter.run()
+    sentiment.run()
 else:
     prediction.run()
