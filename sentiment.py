@@ -28,6 +28,8 @@ nltk.download('omw-1.4')
 nlp = tf.keras.models.load_model('model_nlp')
 
 def run():
+    st.markdown('---')
+
     # Title
     st.subheader('Twitter Sentiment')
 
@@ -36,7 +38,7 @@ def run():
     # Creating list to append tweet data to
     attributes_container = []
 
-    stock = 'BBNI'
+    stock = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     
     today = datetime.datetime.now()
     today = today.strftime('%Y-%m-%d')

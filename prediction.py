@@ -11,7 +11,11 @@ def run():
     
     # Title
     st.subheader("Price Prediction")
-    
+
+    st.markdown('---')
+
+    stock = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
+
     # Import scaler and model
     with open(stock + '_scaler.pkl', 'rb') as file_1:
       scaler = joblib.load(file_1)
@@ -27,6 +31,7 @@ def run():
     SY_SM = hist_all[(hist_all['Date'].dt.year == year_rn) & (hist_all['Date'].dt.month == month_rn)]
     
     st.markdown('---')
+
     st.subheader("Price History")
 
     fig = plt.figure(figsize=(15, 5))
@@ -35,6 +40,7 @@ def run():
     st.pyplot(fig)
 
     st.markdown('---')
+
     if st.button('Predict Price'):
     
       last_15 = hist_all[['Close']].tail(15).reset_index(inplace = False, drop = True)
@@ -55,6 +61,7 @@ def run():
       hist3m = hist_all.tail(75)
 
       st.markdown('---')
+      
       st.subheader("Recent Prices and Prediction")
 
       fig = go.Figure()
