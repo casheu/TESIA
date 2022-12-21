@@ -1,10 +1,10 @@
 streamlit
 nltk
 tensorflow
+joblib
 datetime
 snscrape
 pandas
-joblib
 yfinance
 matplotlib
 Sastrawi

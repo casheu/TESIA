@@ -3,10 +3,10 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import tensorflow as tf
+import joblib
 import datetime
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
-import joblib
 import yfinance as yf
 import matplotlib.pyplot as plt
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -14,7 +14,7 @@ import re
 import numpy as np
 import seaborn as sns
 import sklearn
-import plotly
+import plotly.graph_objects as go
 
 
 st.set_page_config(
@@ -40,6 +40,12 @@ def run():
     stock = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     st.markdown('---')
 
+    # Import scaler and model
+    with open(stock + '_scaler.pkl', 'rb') as file_1:
+      scaler = joblib.load(file_1)
+
+    model = tf.keras.models.load_model(stock + '_Mod')
+
     with st.container():
         col1, col2 = st.columns(2)
         with col1:
@@ -51,7 +57,7 @@ def run():
     with st.container():
         col1, col2 = st.columns(2)
         with col1:
-            st.write("#Today's Tweet")
+            st.write("### Today's Tweet")
             st.markdown('---')
 
             attributes_container = []
@@ -73,9 +79,8 @@ def run():
 
             st.dataframe(tweets)
             
-
         with col2:
-            st.write("#Price History")
+            st.write("### Price History")
             st.markdown('---')
 
             # Scrapping
@@ -164,7 +169,7 @@ def run():
                     plt.show()
                     st.pyplot(fig)
 
-                st.write("#Sentiment Percentage")
+                st.write("### Sentiment Percentage")
                 PieComposition(pred_df, 'label')
 
         with col2:
@@ -187,7 +192,7 @@ def run():
                 Predict_true['Date'] = last_day.tail(1).reset_index(inplace=False,drop=True)
                 hist3m = hist_all.tail(75)
 
-                st.subheader("Recent Prices and Prediction")
+                st.write("### Recent Prices and Prediction")
                 fig = go.Figure()
                 fig.add_trace(go.Candlestick(x=hist3m['Date'],
                       open=hist3m['Open'],
@@ -196,7 +201,7 @@ def run():
                       close=hist3m['Close']))
                 fig.add_trace(go.Scatter(x=Predict_true['Date'], y=Predict_true[0]))
                 st.plotly_chart(fig)
-                st.write('## Prediction : ', Predict_true.at[0,0])
+                st.write('#### Prediction : ', Predict_true.at[0,0])
 
         st.markdown('---')
 
