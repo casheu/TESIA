@@ -5,7 +5,6 @@ import tensorflow as tf
 import yfinance as yf
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-from app import stock
 
 def run():
     st.markdown('---')
