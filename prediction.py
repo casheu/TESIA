@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 def run():
     # Title
-    st.title('Stock Price')
+    st.subheader("Price Prediction")
 
     stock_op = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     

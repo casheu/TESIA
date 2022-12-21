@@ -29,7 +29,7 @@ nlp = tf.keras.models.load_model('model_nlp')
 
 def run():
     # Title
-    st.title('Twitter Sentiment')
+    st.subheader('Twitter Sentiment')
     
     # Creating list to append tweet data to
     attributes_container = []
@@ -53,6 +53,7 @@ def run():
     tweets['Date Created'] = pd.to_datetime(tweets['Date Created']).dt.date
     
     st.markdown('---')
+    
     st.subheader("Today's Tweet")
 
     st.dataframe(tweets)
