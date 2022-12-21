@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 def run():
     # Title
-    st.title('Twitter Sentiment')
+    st.title('Stock Price')
 
     stock_op = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     
@@ -27,7 +27,7 @@ def run():
     SY_SM = hist_all[(hist_all['Date'].dt.year == year_rn) & (hist_all['Date'].dt.month == month_rn)]
     
     st.markdown('---')
-    st.subheader("Today's Tweet")
+    st.subheader("Price History")
 
     fig = plt.figure(figsize=(15, 5))
     plt.plot(SY_SM['Date'], SY_SM['Close'], label = 'Actual')
@@ -55,7 +55,7 @@ def run():
       hist3m = hist_all.tail(75)
 
       st.markdown('---')
-      st.subheader("Sentiment Percentage")
+      st.subheader("Recent Prices and Prediction")
 
       fig = go.Figure()
       fig.add_trace(go.Candlestick(x=hist3m['Date'],
