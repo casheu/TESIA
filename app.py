@@ -1,13 +1,31 @@
 import streamlit as st
-import sentiment
-import prediction
+import nltk
+import tensorflow as tf
 
-# Title
-st.title('TESIA')
+st.set_page_config(
+    page_title='TESIA',
+    layout='wide',
+    initial_sidebar_state='expanded'
+)
 
-navigation = st.sidebar.selectbox('Pages : ', ('Twitter Sentiment', 'Price Prediction'))
+st.markdown('---')
 
-if navigation == 'Twitter Sentiment':
-    sentiment.run()
-else:
-    prediction.run()
+# Download
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+# Import model
+nlp = tf.keras.models.load_model('model_nlp')
+
+def run():
+    with st.container():
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader('Twitter Sentiment')
+    with col2:
+        st.subheader("Price Prediction")
+
+if __name__ == '__main__':
+    run()
