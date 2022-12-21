@@ -12,12 +12,6 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.set_page_config(
-    page_title='TESIA',
-    layout='wide',
-    initial_sidebar_state='expanded'
-)
-
 # Download
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -25,12 +19,7 @@ nltk.download('wordnet')
 nltk.download('omw-1.4')
 
 # Import model
-nlp = tf.keras.models.load_model('model_nlp')
-
-st.markdown('---')
-    
-# Title
-st.subheader('Twitter Sentiment')
+nlp = tf.keras.models.load_model('model_lstm.tf')
 
 def run():
     # Creating list to append tweet data to
@@ -53,14 +42,7 @@ def run():
     tweets_daily = pd.DataFrame(pd.to_datetime(tweets['Date Created']).dt.tz_localize(None))
     tweets['Date Created'] = tweets_daily
     tweets['Date Created'] = pd.to_datetime(tweets['Date Created']).dt.date
-    
-    st.markdown('---')
-    
-    st.subheader("Today's Tweet")
-
-    st.dataframe(tweets)
-
-    st.markdown('---')
+    tweets
 
     if st.button('Predict sentiment'):
         df = pd.DataFrame()
@@ -125,17 +107,12 @@ def run():
                 freq[i] = dataframe[column][dataframe[column] == dq[i]].value_counts().sum()
             data = list(data.values())
             freq = list(freq.values())
-            fig = plt.figure(figsize=(10, 5))
+            fig = plt.figure(figsize=(15, 5))
             plt.pie(freq, labels = data, colors=palette_color, autopct='%.0f%%')
             plt.show()
             st.pyplot(fig)
 
-        st.markdown('---')
-        st.subheader("Sentiment Percentage")
-
         PieComposition(pred_df, 'label')
-
-        st.markdown('---')
 
 if __name__ == '__main__':
     run()
