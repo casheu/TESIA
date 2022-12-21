@@ -27,13 +27,12 @@ nltk.download('omw-1.4')
 # Import model
 nlp = tf.keras.models.load_model('model_nlp')
 
-def run():
+st.markdown('---')
+    
+# Title
+st.subheader('Twitter Sentiment')
 
-    st.markdown('---')
-    
-    # Title
-    st.subheader('Twitter Sentiment')
-    
+def run():
     # Creating list to append tweet data to
     attributes_container = []
 
