@@ -41,7 +41,7 @@ def run():
 
     with st.container():
         col1, col2 = st.columns(2)
-        with col1:
+        with col2:
             st.markdown('---')
 
             st.subheader("Today's Tweet")
@@ -67,15 +67,10 @@ def run():
 
             st.dataframe(tweets)
 
-        with col2:
+        with col1:
             st.markdown('---')
 
             st.subheader("Price History")
-
-            # Import scaler and model
-            with open(stock + '_scaler.pkl', 'rb') as file_1:
-                scaler = joblib.load(file_1)
-            model = tf.keras.models.load_model(stock + '_Mod')
 
             # Scrapping
             stock = yf.Ticker(stock + ".JK")
