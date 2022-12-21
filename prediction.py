@@ -7,19 +7,19 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 def run():
+    st.markdown('---')
+    
     # Title
     st.subheader("Price Prediction")
-
-    stock_op = st.selectbox('Pick a stock:', ('BBNI', 'BBRI', 'BBTN', 'BMRI'))
     
     # Import scaler and model
-    with open(stock_op + '_scaler.pkl', 'rb') as file_1:
+    with open(stock + '_scaler.pkl', 'rb') as file_1:
       scaler = joblib.load(file_1)
 
-    model = tf.keras.models.load_model(stock_op + '_Mod')
+    model = tf.keras.models.load_model(stock + '_Mod')
 
     # Scrapping
-    stock = yf.Ticker(stock_op + ".JK")
+    stock = yf.Ticker(stock + ".JK")
     hist_all = stock.history(period="max").reset_index()
     hist_lat = stock.history(period="min").reset_index()
     year_rn = hist_lat['Date'].iloc[0].year
