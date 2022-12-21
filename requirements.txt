@@ -9,3 +9,6 @@ seaborn
 numpy
 matplotlib
 scikit-learn
+joblib
+yfinance
+plotly
