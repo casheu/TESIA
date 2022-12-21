@@ -11,6 +11,7 @@ import re
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
+import app
 
 
 st.set_page_config(
@@ -37,7 +38,7 @@ def run():
     # Creating list to append tweet data to
     attributes_container = []
 
-    stock = selectstock
+    stock = app.selectstock
     
     today = datetime.datetime.now()
     today = today.strftime('%Y-%m-%d')
