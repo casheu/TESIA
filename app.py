@@ -41,7 +41,7 @@ def run():
 
     with st.container():
         col1, col2 = st.columns(2)
-        with col2:
+        with col1:
             st.markdown('---')
 
             st.subheader("Today's Tweet")
@@ -67,7 +67,7 @@ def run():
 
             st.dataframe(tweets)
 
-        with col1:
+        with col2:
             st.markdown('---')
 
             st.subheader("Price History")
@@ -80,6 +80,8 @@ def run():
             month_rn = hist_lat['Date'].iloc[0].month
             SY_SM = hist_all[(hist_all['Date'].dt.year == year_rn) & (hist_all['Date'].dt.month == month_rn)]
 
+            st.markdown('---')
+            
             fig = plt.figure(figsize=(15, 5))
             plt.plot(SY_SM['Date'], SY_SM['Close'], label = 'Actual')
             plt.legend()
